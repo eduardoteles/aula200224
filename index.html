@@ -3,16 +3,79 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aula 200224</title>
     </head>
     <body>
-        <div>
-            
+        <div id="app">
+            <h1>{{helloString}}</h1>
+            <h2>Please input your name<input type="text" v-model="userName"></h2>
+            <h3>Welcome <span v-if="userName=='Eduardo'">Professor </span><span v-else></span>{{userName}}</h3>
+            <table>
+                <thead>
+                    <tr><th>Variable value</th><th>To the 3rd power</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>{{n3}}</td><td>{{n3**3}}</td></tr>
+                    <tr><td>{{n5}}</td><td>{{n5**3}}</td></tr>
+                    <tr><td>{{n10}}</td><td>{{n10**3}}</td></tr>
+                </tbody>
+            </table>
+            <hr/>
+            <div>
+                <label>Enter hours <input type="text" v-model="userHours"> translates in minutes to: {{userHours*60}}</label>
+                <br>
+                <label>Enter minutes <input type="text" v-model="userMinutes"> translates in hours to: {{userMinutes/60}}</label>
+            </div>
+            <hr/>
+            <div>
+                <label>
+                    This number <input type="number" v-model="n1"> is 
+                    <span v-if="n1>n2">></span>
+                    <span v-else="n1>2">=</span>
+                    than 0!
+                </label>
+            </div>
+            <hr/>
+            <div>
+                {{sumArray(numberArray)}}
+            </div>
         </div>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script>
-
+            const app = Vue.createApp(
+                {
+                    data()
+                    {
+                        return{
+                            helloString : "Hello World",
+                            n1 : 0,
+                            n2 : 0,
+                            n3 : 3,
+                            n5 : 5,
+                            n10 : 10,
+                            userHours : "",
+                            userMinutes : "",
+                            userName: "",
+                            userNumber: "",
+                            numberArray : [1,2,3]
+                        }
+                    },
+                    methods:
+                    {
+                        sumArray(arr)
+                        {
+                            sum=0;
+                            for(i=0;i<arr.length;i++)
+                            {
+                                sum=sum+arr[i];
+                            }
+                            return sum;
+                        }
+                    }
+                }
+            )
+            app.mount('#app');
         </script>
     </body>
 </html>
