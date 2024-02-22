@@ -40,10 +40,16 @@
             <div>
                 {{sumArray(numberArray)}}
             </div>
+            <hr/>
+            <div>
+                <label>Enter a random number <input type="number" v-model="userSumNumber"></label>
+                <br>
+                The sum of numbers until your random number is {{sumNumbers(userSumNumber)}}
+            </div>
         </div>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script>
-            const app = Vue.createApp(
+            Vue.createApp(
                 {
                     data()
                     {
@@ -58,7 +64,8 @@
                             userMinutes : "",
                             userName: "",
                             userNumber: "",
-                            numberArray : [1,2,3]
+                            numberArray : [1,2,3],
+                            userSumNumber : 0
                         }
                     },
                     methods:
@@ -71,11 +78,22 @@
                                 sum=sum+arr[i];
                             }
                             return sum;
+                        },
+                        sumNumbers(number)
+                        {
+                            sum=0;
+                            for(i=0;i<=number;i++)
+                            {
+                                //for multiples of 5, check that if i%5==0
+                                sum=sum+i;
+                            }
+                            return sum;
                         }
+                        //random numbers (0-9): Math.floor(Math.random()*10)
                     }
                 }
             )
-            app.mount('#app');
+            .mount('#app');
         </script>
     </body>
 </html>
